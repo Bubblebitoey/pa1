@@ -1,11 +1,12 @@
 import javax.swing.*;
-import javax.swing.text.AbstractDocument.Content;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ConverterUI extends JFrame {
+	/***
+	 * attributes for graphacal components
+	 */
 	private JButton convertButton = new JButton("Convert!");
 	private UnitConverter unitconverter;
 	private JTextField firstInput;
@@ -20,11 +21,19 @@ public class ConverterUI extends JFrame {
 	private Unit from;
 	private Unit to;
 
+	/***
+	 * this method use to run window
+	 */
 	public void run() {
+		/**
+		 * set size of window
+		 */
 		setSize(800, 100);
 		setVisible(true);
 	}
-
+	/**
+	 * initialize the components in the window 
+	 */
 	private void initComponents() {
 
 		FlowLayout layout = new FlowLayout();
@@ -34,6 +43,9 @@ public class ConverterUI extends JFrame {
 		secondInput = new JTextField("                            ");
 		unitconverter = new UnitConverter();
 
+		/**
+		 * add units into JComboBox
+		 */
 		firstUnit = new JComboBox<Unit>();
 		Unit[] lengths = unitconverter.getUnits();
 		for (Unit u : lengths)
@@ -46,13 +58,22 @@ public class ConverterUI extends JFrame {
 			secondUnit.addItem(u);
 		secondUnit = new JComboBox<Unit>(lengths1);
 
+		/**
+		 * make the button leftToright and rightToLeft can press only one button
+		 */
 		ButtonGroup group = new ButtonGroup();
 		group.add(leftToRight);
 		group.add(rightToLeft);
 
+		/**
+		 * add action for convert button
+		 */
 		ActionListener listener = new ConvertButtonListener();
-
 		convertButton.addActionListener(listener);
+		
+		/**
+		 * clear textfield to empty
+		 */
 		clearButton.addActionListener(new ActionListener() {
 
 			@Override
@@ -63,9 +84,15 @@ public class ConverterUI extends JFrame {
 			}
 		});
 
+		/**
+		 * at first user can input the number only first textfield
+		 */
 		secondInput.setEnabled(false);
 		leftToRight.setSelected(true);
 
+		/**
+		 * when click leftToright button user allow to input number only in first textfield 
+		 */
 		leftToRight.addActionListener(new ActionListener() {
 
 			@Override
@@ -76,6 +103,9 @@ public class ConverterUI extends JFrame {
 			}
 		});
 
+		/**
+		 * when click rightToLeft button user allow to input number only in second textfield
+		 */
 		rightToLeft.addActionListener(new ActionListener() {
 
 			@Override
@@ -86,6 +116,9 @@ public class ConverterUI extends JFrame {
 			}
 		});
 
+		/**
+		 * add every components into window
+		 */
 		this.add(firstInput);
 		this.add(firstUnit);
 		this.add(equalSign);
@@ -106,18 +139,27 @@ public class ConverterUI extends JFrame {
 		initComponents();
 	}
 
+	/**
+	 * the action perform action when the "convert" button is pressed
+	 */
 	class ConvertButtonListener implements ActionListener {
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			String s = firstInput.getText().trim();
 
+			/**
+			 * get current selected unit
+			 */
 			from = (Unit) firstUnit.getSelectedItem();
 			to = (Unit) secondUnit.getSelectedItem();
 
 			System.out.println("actionPerformed: input=" + s);
 
 			if (s.length() > 0) {
+				/**
+				 * if user not input number into textfield the program will show error
+				 */
 				try {
 					Double recieveWord = Double.valueOf(s);
 					if (leftToRight.isSelected()) {
@@ -133,4 +175,11 @@ public class ConverterUI extends JFrame {
 
 		}
 	}
+	
+	public static void main (String[]args) {
+		UnitConverter converter = new UnitConverter();
+		ConverterUI view = new ConverterUI(converter);
+		view.run();
+	}
+
 }
