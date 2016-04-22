@@ -17,11 +17,14 @@ public class ConverterUI extends JFrame {
 	private JRadioButton leftToRight = new JRadioButton("Left->Right");
 	private JRadioButton rightToLeft = new JRadioButton("Right->Left");
 
+	private Unit from;
+	private Unit to;
+
 	public void run() {
 		setSize(800, 100);
 		setVisible(true);
 	}
-	
+
 	private void initComponents() {
 
 		FlowLayout layout = new FlowLayout();
@@ -59,10 +62,12 @@ public class ConverterUI extends JFrame {
 				secondInput.setText("");
 			}
 		});
-		
+
+		secondInput.setEnabled(false);
 		leftToRight.setSelected(true);
+
 		leftToRight.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
@@ -70,19 +75,17 @@ public class ConverterUI extends JFrame {
 				secondInput.setEnabled(false);
 			}
 		});
-		
+
 		rightToLeft.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				firstInput.setEnabled(false);
 				secondInput.setEnabled(true);
-				
-				
 			}
 		});
-		
+
 		this.add(firstInput);
 		this.add(firstUnit);
 		this.add(equalSign);
@@ -109,15 +112,19 @@ public class ConverterUI extends JFrame {
 		public void actionPerformed(ActionEvent evt) {
 			String s = firstInput.getText().trim();
 
+			from = (Unit) firstUnit.getSelectedItem();
+			to = (Unit) secondUnit.getSelectedItem();
+
 			System.out.println("actionPerformed: input=" + s);
 
 			if (s.length() > 0) {
 				try {
 					Double recieveWord = Double.valueOf(s);
-					Unit unit1 = (Unit) firstUnit.getSelectedItem();
-					Unit unit2 = (Unit) secondUnit.getSelectedItem();
-
-					secondInput.setText(unitconverter.convert(recieveWord, unit1, unit2) + "");
+					if (leftToRight.isSelected()) {
+						secondInput.setText(unitconverter.convert(recieveWord, from, to) + "");
+					} else {
+						firstInput.setText(unitconverter.convert(recieveWord, to, from) + "");
+					}
 
 				} catch (Exception e) {
 					System.out.println(e.toString());
