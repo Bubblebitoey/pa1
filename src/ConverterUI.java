@@ -14,11 +14,14 @@ public class ConverterUI extends JFrame {
 	private JComboBox<Unit> secondUnit;
 	private JLabel equalSign = new JLabel("=");
 	private JButton clearButton = new JButton("Clear");
+	private JRadioButton leftToRight = new JRadioButton("Left->Right");
+	private JRadioButton rightToLeft = new JRadioButton("Right->Left");
 
 	public void run() {
+		setSize(800, 100);
 		setVisible(true);
 	}
-
+	
 	private void initComponents() {
 
 		FlowLayout layout = new FlowLayout();
@@ -40,6 +43,10 @@ public class ConverterUI extends JFrame {
 			secondUnit.addItem(u);
 		secondUnit = new JComboBox<Unit>(lengths1);
 
+		ButtonGroup group = new ButtonGroup();
+		group.add(leftToRight);
+		group.add(rightToLeft);
+
 		ActionListener listener = new ConvertButtonListener();
 
 		convertButton.addActionListener(listener);
@@ -48,10 +55,34 @@ public class ConverterUI extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-
+				firstInput.setText("");
+				secondInput.setText("");
 			}
 		});
-
+		
+		leftToRight.setSelected(true);
+		leftToRight.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				firstInput.setEnabled(true);
+				secondInput.setEnabled(false);
+			}
+		});
+		
+		rightToLeft.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				firstInput.setEnabled(false);
+				secondInput.setEnabled(true);
+				
+				
+			}
+		});
+		
 		this.add(firstInput);
 		this.add(firstUnit);
 		this.add(equalSign);
@@ -59,6 +90,8 @@ public class ConverterUI extends JFrame {
 		this.add(secondUnit);
 		this.add(convertButton);
 		this.add(clearButton);
+		this.add(leftToRight);
+		this.add(rightToLeft);
 
 		this.pack();
 	}
@@ -87,7 +120,7 @@ public class ConverterUI extends JFrame {
 					secondInput.setText(unitconverter.convert(recieveWord, unit1, unit2) + "");
 
 				} catch (Exception e) {
-					System.out.println(e.getMessage());
+					System.out.println(e.toString());
 				}
 			}
 
