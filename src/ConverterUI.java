@@ -85,12 +85,6 @@ public class ConverterUI extends JFrame {
 		});
 
 		/**
-		 * at first user can input the number only first textfield and leftToRight button was pressed
-		 */
-		secondInput.setEnabled(false);
-		leftToRight.setSelected(true);
-
-		/**
 		 * when click leftToright button user allow to input number only in first textfield 
 		 */
 		leftToRight.addActionListener(new ActionListener() {
