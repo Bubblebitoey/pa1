@@ -70,7 +70,7 @@ public class ConverterUI extends JFrame {
 		 */
 		ActionListener listener = new ConvertButtonListener();
 		convertButton.addActionListener(listener);
-		
+
 		/**
 		 * clear textfield to empty
 		 */
@@ -85,7 +85,7 @@ public class ConverterUI extends JFrame {
 		});
 
 		/**
-		 * at first user can input the number only first textfield
+		 * at first user can input the number only first textfield and leftToRight button was pressed
 		 */
 		secondInput.setEnabled(false);
 		leftToRight.setSelected(true);
@@ -147,20 +147,20 @@ public class ConverterUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			String s = firstInput.getText().trim();
-
 			/**
 			 * get current selected unit
 			 */
 			from = (Unit) firstUnit.getSelectedItem();
 			to = (Unit) secondUnit.getSelectedItem();
 
-			System.out.println("actionPerformed: input=" + s);
-
 			if (s.length() > 0) {
 				/**
 				 * if user not input number into textfield the program will show error
 				 */
 				try {
+					/** 
+					 * parse String to double
+					 */
 					Double recieveWord = Double.valueOf(s);
 					if (leftToRight.isSelected()) {
 						secondInput.setText(unitconverter.convert(recieveWord, from, to) + "");
@@ -170,16 +170,17 @@ public class ConverterUI extends JFrame {
 
 				} catch (Exception e) {
 					System.out.println(e.toString());
+
 				}
+
 			}
 
 		}
 	}
-	
+
 	public static void main (String[]args) {
 		UnitConverter converter = new UnitConverter();
 		ConverterUI view = new ConverterUI(converter);
 		view.run();
 	}
-
 }
