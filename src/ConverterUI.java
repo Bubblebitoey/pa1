@@ -18,9 +18,6 @@ public class ConverterUI extends JFrame {
 	private JRadioButton leftToRight = new JRadioButton("Left->Right");
 	private JRadioButton rightToLeft = new JRadioButton("Right->Left");
 
-	private Unit from;
-	private Unit to;
-
 	/***
 	 * this method use to run window
 	 */
@@ -148,6 +145,8 @@ public class ConverterUI extends JFrame {
 		@Override
 		public void actionPerformed(ActionEvent evt) {
 			String s = "";
+			Unit from, to;
+
 			if (leftToRight.isSelected()) {
 				s = firstInput.getText().trim();
 				from = (Unit) firstUnit.getSelectedItem();
