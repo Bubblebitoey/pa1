@@ -31,8 +31,9 @@ public class ConverterUI extends JFrame {
 		setSize(800, 100);
 		setVisible(true);
 	}
+
 	/**
-	 * initialize the components in the window 
+	 * initialize the components in the window
 	 */
 	private void initComponents() {
 
@@ -42,6 +43,10 @@ public class ConverterUI extends JFrame {
 		firstInput = new JTextField("                             ");
 		secondInput = new JTextField("                            ");
 		unitconverter = new UnitConverter();
+
+		// set p in first time
+		leftToRight.setSelected(true);
+		secondInput.setEnabled(false);
 
 		/**
 		 * add units into JComboBox
@@ -85,7 +90,8 @@ public class ConverterUI extends JFrame {
 		});
 
 		/**
-		 * when click leftToright button user allow to input number only in first textfield 
+		 * when click leftToright button user allow to input number only in
+		 * first textfield
 		 */
 		leftToRight.addActionListener(new ActionListener() {
 
@@ -98,7 +104,8 @@ public class ConverterUI extends JFrame {
 		});
 
 		/**
-		 * when click rightToLeft button user allow to input number only in second textfield
+		 * when click rightToLeft button user allow to input number only in
+		 * second textfield
 		 */
 		rightToLeft.addActionListener(new ActionListener() {
 
@@ -140,31 +147,30 @@ public class ConverterUI extends JFrame {
 
 		@Override
 		public void actionPerformed(ActionEvent evt) {
-			String s = firstInput.getText().trim();
-			/**
-			 * get current selected unit
-			 */
-			from = (Unit) firstUnit.getSelectedItem();
-			to = (Unit) secondUnit.getSelectedItem();
+			String s = "";
+			if (leftToRight.isSelected()) {
+				s = firstInput.getText().trim();
+				from = (Unit) firstUnit.getSelectedItem();
+				to = (Unit) secondUnit.getSelectedItem();
+			} else {
+				s = secondInput.getText().trim();
+				from = (Unit) secondUnit.getSelectedItem();
+				to = (Unit) firstUnit.getSelectedItem();
+			}
 
 			if (s.length() > 0) {
-				/**
-				 * if user not input number into textfield the program will show error
-				 */
+				// if user not input number into textfield the program will show
+				// error
 				try {
-					/** 
-					 * parse String to double
-					 */
+					// parse String to double
 					Double recieveWord = Double.valueOf(s);
 					if (leftToRight.isSelected()) {
 						secondInput.setText(unitconverter.convert(recieveWord, from, to) + "");
 					} else {
-						firstInput.setText(unitconverter.convert(recieveWord, to, from) + "");
+						firstInput.setText(unitconverter.convert(recieveWord, from, to) + "");
 					}
-
 				} catch (Exception e) {
 					System.out.println(e.toString());
-
 				}
 
 			}
@@ -172,7 +178,7 @@ public class ConverterUI extends JFrame {
 		}
 	}
 
-	public static void main (String[]args) {
+	public static void main(String[] args) {
 		UnitConverter converter = new UnitConverter();
 		ConverterUI view = new ConverterUI(converter);
 		view.run();
