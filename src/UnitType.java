@@ -2,7 +2,7 @@ public enum UnitType {
 	Length("length"),
 	Area("Area"),
 	Weight("Weight"),
-	Radiation("Radiation");
+	Volume("Volume");
 
 	private String name;
 

@@ -24,8 +24,8 @@ public class UnitFactory {
 			return Area.values();
 		else if(unitType.equals(UnitType.Length))
 			return Length.values();
-		else if(unitType.equals(UnitType.Radiation))
-			return Radiation.values();
+		else if(unitType.equals(UnitType.Volume))
+			return Volume.values();
 		else if(unitType.equals(UnitType.Weight))
 			return Weight.values();
 		else return null;

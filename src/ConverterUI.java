@@ -63,11 +63,11 @@ public class ConverterUI extends JFrame {
 				addUnit(UnitType.Weight);
 			}
 		});
-		JMenuItem itemRadiation = new JMenuItem("Radiation");
-		itemRadiation.addActionListener(new ActionListener() {
+		JMenuItem itemVolume = new JMenuItem("Volume");
+		itemVolume.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				addUnit(UnitType.Radiation);
+				addUnit(UnitType.Volume);
 			}
 		});
 		JMenuItem exit = new JMenuItem("Exit");
@@ -80,7 +80,7 @@ public class ConverterUI extends JFrame {
 
 		menu.add(itemLength);
 		menu.add(itemArea);
-		menu.add(itemRadiation);
+		menu.add(itemVolume);
 		menu.add(itemWeight);
 		menu.add(exit);
 
@@ -213,9 +213,9 @@ public class ConverterUI extends JFrame {
 					// parse String to double
 					Double recieveWord = Double.valueOf(s);
 					if (leftToRight.isSelected()) {
-						secondInput.setText(unitconverter.convert(recieveWord, from, to) + "");
+						secondInput.setText(String.format("%.5g", unitconverter.convert(recieveWord, from, to)));
 					} else {
-						firstInput.setText(unitconverter.convert(recieveWord, from, to) + "");
+						firstInput.setText(String.format("%.5g", unitconverter.convert(recieveWord, from, to)));
 					}
 				} catch (Exception e) {
 					System.out.println(e.toString());

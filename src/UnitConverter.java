@@ -33,9 +33,7 @@ public class UnitConverter {
 		return Area.values();
 	}
 
-	public Unit[] getUnitsRad() {
-		return Radiation.values();
-	}
+	public Unit[] getUnitsVolume() { return Volume.values(); }
 
 	public Unit[] getUnitsWeight() {
 		return Weight.values();

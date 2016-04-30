@@ -9,6 +9,8 @@ public enum Length implements Unit{
 	CENTIMETER("Centimeter", 0.01),
 	KILOMETER("Kilometer", 1000.0),
 	MILE("Mile", 1609.344),
+	ROPE("Rope", 6.096),
+	CHAIN("Chain", 20.12),
 	WA("Wa", 2.0);
 
 	/**
