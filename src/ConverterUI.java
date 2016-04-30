@@ -1,3 +1,5 @@
+import com.sun.java.swing.action.ExitAction;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,8 +13,8 @@ public class ConverterUI extends JFrame {
 	private UnitConverter unitconverter;
 	private JTextField firstInput;
 	private JTextField secondInput;
-	private JComboBox<Unit> firstUnit;
-	private JComboBox<Unit> secondUnit;
+	private JComboBox<Unit> firstUnit = new JComboBox<>();
+	private JComboBox<Unit> secondUnit=new JComboBox<>();
 	private JLabel equalSign = new JLabel("=");
 	private JButton clearButton = new JButton("Clear");
 	private JRadioButton leftToRight = new JRadioButton("Left->Right");
@@ -34,8 +36,58 @@ public class ConverterUI extends JFrame {
 	 */
 	private void initComponents() {
 
+		addUnit(UnitType.Length);
+
 		FlowLayout layout = new FlowLayout();
 		this.setLayout(layout);
+
+		JMenuBar menuBar = new JMenuBar();
+		JMenu menu = new JMenu("menu");
+		JMenuItem itemLength = new JMenuItem("Length");
+		itemLength.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addUnit(UnitType.Length);
+			}
+		});
+		JMenuItem itemArea = new JMenuItem("Area");
+		itemArea.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addUnit(UnitType.Area);
+			}
+		});
+		JMenuItem itemWeight = new JMenuItem("Weight");
+		itemWeight.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addUnit(UnitType.Weight);
+			}
+		});
+		JMenuItem itemRadiation = new JMenuItem("Radiation");
+		itemRadiation.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				addUnit(UnitType.Radiation);
+			}
+		});
+		ExitAction exit = new ExitAction();
+		exit.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+
+		menu.add(itemLength);
+		menu.add(itemArea);
+		menu.add(itemRadiation);
+		menu.add(itemWeight);
+		menu.add(exit);
+
+		menuBar.add(menu);
+
+		setJMenuBar(menuBar);
 
 		firstInput = new JTextField("                             ");
 		secondInput = new JTextField("                            ");
@@ -44,21 +96,6 @@ public class ConverterUI extends JFrame {
 		// set p in first time
 		leftToRight.setSelected(true);
 		secondInput.setEnabled(false);
-
-		/**
-		 * add units into JComboBox
-		 */
-		firstUnit = new JComboBox<Unit>();
-		Unit[] lengths = unitconverter.getUnits();
-		for (Unit u : lengths)
-			firstUnit.addItem(u);
-		firstUnit = new JComboBox<Unit>(lengths);
-
-		secondUnit = new JComboBox<Unit>();
-		Unit[] lengths1 = unitconverter.getUnits();
-		for (Unit u : lengths)
-			secondUnit.addItem(u);
-		secondUnit = new JComboBox<Unit>(lengths1);
 
 		/**
 		 * make the button leftToright and rightToLeft can press only one button
@@ -137,6 +174,19 @@ public class ConverterUI extends JFrame {
 		initComponents();
 	}
 
+	public void addUnit(UnitType type) {
+		firstUnit.removeAllItems();
+		secondUnit.removeAllItems();
+
+				Unit[] units1 = unitconverter.getUnit(type);
+				for (Unit u : units1)
+					firstUnit.addItem(u);
+
+				Unit[] units2 = unitconverter.getUnit(type);
+				for (Unit u : units2)
+					secondUnit.addItem(u);
+	}
+
 	/**
 	 * the action perform action when the "convert" button is pressed
 	 */
@@ -177,9 +227,11 @@ public class ConverterUI extends JFrame {
 		}
 	}
 
-	public static void main(String[] args) {
-		UnitConverter converter = new UnitConverter();
-		ConverterUI view = new ConverterUI(converter);
-		view.run();
+	class ItemListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent evt) {
+			//check that what user select
+		}
 	}
 }
