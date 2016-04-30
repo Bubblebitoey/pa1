@@ -14,10 +14,19 @@ public class UnitConverter {
 		return amount * fromUnit.getValue() / toUnit.getValue();
 	}
 
+	/**
+	 *
+	 * @return unit types from unit factory
+	 */
 	public UnitType[] getUnitTypes() {
 		return unitFactory.getUnitTypes();
 	}
 
+	/**
+	 *
+	 * @param type unit in UnitType
+	 * @return each unit from unit factory
+	 */
 	public Unit[] getUnit(UnitType type) {
 		return unitFactory.getUnits(type);
 	}
@@ -28,13 +37,25 @@ public class UnitConverter {
 	public Unit[] getUnitsLength() {
 		return Length.values();
 	}
-	
+
+	/**
+	 *
+	 * @return recieve all units from class Area
+	 */
 	public Unit[] getUnitsArea() {
 		return Area.values();
 	}
 
+	/**
+	 *
+	 * @return recieve all units from class Volume
+	 */
 	public Unit[] getUnitsVolume() { return Volume.values(); }
 
+	/**
+	 *
+	 * @return recieve all units from class Weight
+	 */
 	public Unit[] getUnitsWeight() {
 		return Weight.values();
 	}

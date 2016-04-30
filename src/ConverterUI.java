@@ -173,6 +173,10 @@ public class ConverterUI extends JFrame {
 		initComponents();
 	}
 
+	/**
+	 *
+	 * @param type type of unit in UnitType
+	 */
 	public void addUnit(UnitType type) {
 		firstUnit.removeAllItems();
 		secondUnit.removeAllItems();

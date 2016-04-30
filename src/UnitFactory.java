@@ -15,10 +15,19 @@ public class UnitFactory {
 		return instance;
 	}
 
+	/**
+	 *
+	 * @return all units
+	 */
 	public UnitType[] getUnitTypes() {
 		return type;
 	}
 
+	/**
+	 *
+	 * @param unitType each unit
+	 * @return unit in category of each unit
+	 */
 	public Unit[] getUnits(UnitType unitType) {
 		if (unitType.equals(UnitType.Area))
 			return Area.values();
