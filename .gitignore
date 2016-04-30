@@ -7,3 +7,4 @@ build/
 *.classpath
 .idea/
 *.iml
+src/META-INF/
