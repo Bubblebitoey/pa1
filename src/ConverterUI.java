@@ -1,4 +1,3 @@
-import com.sun.java.swing.action.ExitAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -71,7 +70,7 @@ public class ConverterUI extends JFrame {
 				addUnit(UnitType.Radiation);
 			}
 		});
-		ExitAction exit = new ExitAction();
+		JMenuItem exit = new JMenuItem("Exit");
 		exit.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
